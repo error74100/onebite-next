@@ -1,7 +1,7 @@
 import { BookData } from '@/types';
 
 export default async function fetchBooks(q?: string): Promise<BookData[]> {
-  let url = 'http://onebite-books-server-main-vert.vercel.app/book';
+  let url = 'https://onebite-books-server-main-vert.vercel.app/book';
 
   if (q) {
     url += `/search?q=${q}`;
@@ -9,6 +9,8 @@ export default async function fetchBooks(q?: string): Promise<BookData[]> {
 
   try {
     const response = await fetch(url);
+
+    if (!response.ok) throw new Error('');
 
     return await response.json();
   } catch (err) {
